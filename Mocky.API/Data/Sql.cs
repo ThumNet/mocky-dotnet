@@ -37,5 +37,19 @@ CREATE TABLE mocks_v3(
         public const string GET = @"SELECT content, content_type, status, charset, headers
             FROM mocks_v3
             WHERE id=$id";
+        
+        public const string UPDATE = @"UPDATE mocks_v3
+          SET
+            name = $name,
+            content = $content,
+            content_type = $content_type,
+            status = $status,
+            charset = $charset,
+            headers = $headers,
+            hash_ip = $hash_ip,
+            expire_at = $expire_at
+          WHERE id = $id AND secret_token = $secret_token";
+
+        public const string DELETE = "DELETE FROM mocks_v3 WHERE id = $id and secret_token = $secret_token";
     }
 }

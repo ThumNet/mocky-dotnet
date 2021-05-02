@@ -29,7 +29,21 @@ namespace Mocky.API.Controllers
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
             var mock = _mockyRepository.Get(id);
-            return new OkObjectResult(mock);
+            return mock == null ? NotFound() : Ok(mock);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> OnPutAsync(Guid id, CreateUpdateMock model)
+        {
+            var updated = _mockyRepository.Update(id, model);
+            return updated ? NoContent() : NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> OnDeleteAsync(Guid id, DeleteMock model)
+        {
+            var deleted = _mockyRepository.Delete(id, model);
+            return deleted ? NoContent() : NotFound();
         }
 
         [HttpGet("encodings")]
