@@ -1,15 +1,6 @@
 ﻿# Mocky dotnet
 
-The [mocky](https://designer.mocky.io) API implemented in dotnet.
-
-
-### Resources
-
-https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/bulk-insert
-https://extendsclass.com/sqlite-browser.html#
-https://dotnetcorecentral.com/blog/how-to-use-sqlite-with-dapper/
-
-https://sqliteonline.com
+The [Mocky API](https://designer.mocky.io) implemented in dotnet.
 
 ## TODO:
 
@@ -17,6 +8,11 @@ https://sqliteonline.com
 - [ ] Docker? https://www.thorsten-hans.com/how-to-build-smaller-and-secure-docker-images-for-net5/
 - [x] Remove async - https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/async
 - [ ] When db empty, stats fails DBNull (might be fixed with dapper)
+
+## Sample 
+
+Create a mock
+```json
 {
   "name": "first-item",
   "content": "this is a test",
@@ -31,3 +27,21 @@ https://sqliteonline.com
   "secret": "my-big-secret",
   "expiration": 1
 }
+```
+
+<!-- LICENSE -->
+## License
+
+Distributed under the Apache 2.0 License. See `LICENSE` for more information.
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+
+* [Mocky](https://github.com/julien-lafont/Mocky)
+
+### Resources
+
+- https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/bulk-insert
+- https://extendsclass.com/sqlite-browser.html#
+-  https://dotnetcorecentral.com/blog/how-to-use-sqlite-with-dapper/
+- https://sqliteonline.com
