@@ -32,6 +32,10 @@ namespace Mocky.API.Data
 
             cmd.CommandText = Sql.CREATE_TABLE;
             cmd.ExecuteNonQuery();
+
+            // Enable write-ahead logging
+            cmd.CommandText = "PRAGMA journal_mode = 'wal'";
+            cmd.ExecuteNonQuery();
         }
     }
 }

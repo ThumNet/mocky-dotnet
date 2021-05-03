@@ -35,7 +35,7 @@ namespace Mocky.API
             });
 
             services
-                .AddSingleton(new DataConfig { ConnectionString = "Data Source=Mocky.sqlite" })
+                .AddSingleton(new DataConfig { ConnectionString = "Data Source=Mocky.sqlite;Cache=Shared" })
                 .AddSingleton<IDataBootstrap, DataBootstrap>()
                 .AddSingleton<IMockyRepository, MockyRepository>();
 
