@@ -4,7 +4,7 @@ https://dotnetcorecentral.com/blog/how-to-use-sqlite-with-dapper/
 
 https://sqliteonline.com
 
-
+Add dapper? https://www.nuget.org/packages/Dapper/
 
 
 {

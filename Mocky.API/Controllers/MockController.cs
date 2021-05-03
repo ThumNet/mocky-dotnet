@@ -8,7 +8,7 @@ using Mocky.API.ViewModels;
 namespace Mocky.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MockController : ControllerBase
     {
         private readonly IMockyRepository _mockyRepository;

@@ -15,6 +15,9 @@ namespace Mocky.API.Data
         bool Update(Guid id, CreateUpdateMock mock);
         Mock Get(Guid id);
         bool Delete(Guid id, DeleteMock mock);
+        Mock TouchAndGet(Guid id);
+
+        Stats AdminStats();
     }
 
     public class MockyRepository : IMockyRepository
@@ -24,6 +27,35 @@ namespace Mocky.API.Data
         public MockyRepository(DataConfig config)
         {
             _config = config;
+        }
+
+        public Stats AdminStats()
+        {
+            using var connection = new SqliteConnection(_config.ConnectionString);
+            connection.Open();
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = Sql.ADMIN_STATS;
+
+            using (var reader = cmd.ExecuteReader())
+            {
+                if (!reader.HasRows) 
+                {
+                    return null;
+                }
+
+                reader.Read();
+                var stats = new Stats();
+                stats.NumberOfMocks = (long)reader["nb_mocks"];
+                stats.TotalAccess = (long)reader["total_access"];
+                stats.NumberOfMocksAccessedInMonth = (long)reader["nb_mocks_accessed_in_month"];
+                stats.NumberOfMocksCreatedInMonth = (long)reader["nb_mocks_created_in_month"];
+                stats.NumberOfMocksNeverAccessed = (long)reader["nb_mocks_never_accessed"];
+                stats.NumberOfMocksNotAccessedInYear = (long)reader["nb_mocks_not_accessed_in_year"];
+                stats.NumberOfDistinctIps = (long)reader["nb_distinct_ips"];
+                stats.MockAverageLength = (double)reader["mock_average_length"];
+                return stats;
+            }
         }
 
         public Guid Create(CreateUpdateMock mock)
@@ -100,6 +132,21 @@ namespace Mocky.API.Data
                 mock.Headers = JsonSerializer.Deserialize<Dictionary<string, string>>((string)reader["headers"]);
                 return mock;
             }
+        }
+
+        public Mock TouchAndGet(Guid id)
+        {
+            using var connection = new SqliteConnection(_config.ConnectionString);
+            connection.Open();
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = Sql.UPDATE_STATS;
+            cmd.Parameters.AddWithValue("$id", id.ToString());
+            cmd.Parameters.AddWithValue("$last_access_at", DateTime.UtcNow);
+            cmd.Prepare();
+
+            var rowsEffected = cmd.ExecuteNonQuery();
+            return rowsEffected == 1 ? Get(id) : null;
         }
 
         public bool Update(Guid id, CreateUpdateMock mock)
