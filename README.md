@@ -1,4 +1,11 @@
-﻿https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/bulk-insert
+﻿# Mocky dotnet
+
+The [mocky](https://designer.mocky.io) API implemented in dotnet.
+
+
+### Resources
+
+https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/bulk-insert
 https://extendsclass.com/sqlite-browser.html#
 https://dotnetcorecentral.com/blog/how-to-use-sqlite-with-dapper/
 
