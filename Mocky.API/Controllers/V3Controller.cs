@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Mocky.API.Data;
 
@@ -17,7 +16,7 @@ namespace Mocky.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public IActionResult OnGet(Guid id)
         {
             var mock = _mockyRepository.TouchAndGet(id);
             if (mock == null) { return NotFound(); }
