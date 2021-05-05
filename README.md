@@ -5,29 +5,27 @@ The [Mocky API](https://designer.mocky.io) implemented in dotnet.
 ## TODO:
 
 - [ ] Add dapper? https://www.nuget.org/packages/Dapper/
-- [ ] Docker? https://www.thorsten-hans.com/how-to-build-smaller-and-secure-docker-images-for-net5/
+- [x] Docker build for Raspberry Pi3
+- [ ] Docker scan https://www.thorsten-hans.com/how-to-build-smaller-and-secure-docker-images-for-net5/
 - [x] Remove async - https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/async
 - [ ] When db empty, stats fails DBNull (might be fixed with dapper)
 
-## Sample 
+## Sample API calls
 
-Create a mock
-```json
-{
-  "name": "first-item",
-  "content": "this is a test",
-  "contentType": "text/plain",
-  "status": 200,
-  "charset": "utf-8",
-  "headers": {
-    "additionalProp1": "string",
-    "additionalProp2": "string",
-    "additionalProp3": "string"
-  },
-  "secret": "my-big-secret",
-  "expiration": 1
-}
-```
+See [demo.http](sample/demo.http)
+
+## Docker
+
+docker build . -t mocky-dotnet:0.0.1
+docker run -it -p 8000:80 --rm mocky-dotnet:0.0.1
+
+### Building for Raspberry Pi3b+
+
+There is a private repo on docker.io
+
+1. Build the image `docker build -t thumnet/dotnet:mocky-dotnet-arm32v7 -f Dockerfile.arm32v7 .`
+2. Push the image `docker push thumnet/dotnet/mocky-dotnet:arm32v7`
+3. Open portainer and add the container using the tag in step 2  
 
 <!-- LICENSE -->
 ## License

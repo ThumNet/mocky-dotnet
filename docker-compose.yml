@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  mocky.api:
+    image: ${DOCKER_REGISTRY-}mocky
+    build:
+      context: .
+      dockerfile: Mocky.API/Dockerfile
